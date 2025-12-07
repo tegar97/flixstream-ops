@@ -68,12 +68,12 @@ images:
   # - name: tegar900/flixstream-user-service
   #   newTag: latest
   - name: tegar900/flixstream-catalog-service
-    newTag: "1447a97"
-  # - name: tegar900/flixstream-recommendation-service
-  #   newTag: latest
-  # - name: tegar900/flixstream-search-service
-  #   newTag: latest
-  # - name: tegar900/flixstream-payment-service
-  #   newTag: latest
-  # - name: tegar900/flixstream-frontend
-  #   newTag: latest
+    newTag: "3d15966"
+# - name: tegar900/flixstream-recommendation-service
+#   newTag: latest
+# - name: tegar900/flixstream-search-service
+#   newTag: latest
+# - name: tegar900/flixstream-payment-service
+#   newTag: latest
+# - name: tegar900/flixstream-frontend
+#   newTag: latest

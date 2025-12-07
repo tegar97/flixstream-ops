@@ -24,14 +24,14 @@ replicas:
   #   count: 1
   - name: catalog-service
     count: 1
-  # - name: recommendation-service
-  #   count: 1
-  # - name: search-service
-  #   count: 1
-  # - name: payment-service
-  #   count: 1
-  # - name: frontend
-  #   count: 1
+    # - name: recommendation-service
+    #   count: 1
+    # - name: search-service
+    #   count: 1
+    # - name: payment-service
+    #   count: 1
+    # - name: frontend
+    #   count: 1
 patches:
   # - path: patches/api-gateway-service.yaml
   #   target:
@@ -57,38 +57,38 @@ patches:
     target:
       kind: ConfigMap
       name: catalog-service-config
-  # - path: patches/recommendation-service-resources.yaml
-  #   target:
-  #     kind: Deployment
-  #     name: recommendation-service
-  # - path: patches/recommendation-service-configmap.yaml
-  #   target:
-  #     kind: ConfigMap
-  #     name: recommendation-service-config
-  # - path: patches/search-service-resources.yaml
-  #   target:
-  #     kind: Deployment
-  #     name: search-service
-  # - path: patches/search-service-configmap.yaml
-  #   target:
-  #     kind: ConfigMap
-  #     name: search-service-config
-  # - path: patches/payment-service-resources.yaml
-  #   target:
-  #     kind: Deployment
-  #     name: payment-service
-  # - path: patches/payment-service-configmap.yaml
-  #   target:
-  #     kind: ConfigMap
-  #     name: payment-service-config
-  # - path: patches/frontend-resources.yaml
-  #   target:
-  #     kind: Deployment
-  #     name: frontend
-  # - path: patches/frontend-configmap.yaml
-  #   target:
-  #     kind: ConfigMap
-  #     name: frontend-config
+      # - path: patches/recommendation-service-resources.yaml
+      #   target:
+      #     kind: Deployment
+      #     name: recommendation-service
+      # - path: patches/recommendation-service-configmap.yaml
+      #   target:
+      #     kind: ConfigMap
+      #     name: recommendation-service-config
+      # - path: patches/search-service-resources.yaml
+      #   target:
+      #     kind: Deployment
+      #     name: search-service
+      # - path: patches/search-service-configmap.yaml
+      #   target:
+      #     kind: ConfigMap
+      #     name: search-service-config
+      # - path: patches/payment-service-resources.yaml
+      #   target:
+      #     kind: Deployment
+      #     name: payment-service
+      # - path: patches/payment-service-configmap.yaml
+      #   target:
+      #     kind: ConfigMap
+      #     name: payment-service-config
+      # - path: patches/frontend-resources.yaml
+      #   target:
+      #     kind: Deployment
+      #     name: frontend
+      # - path: patches/frontend-configmap.yaml
+      #   target:
+      #     kind: ConfigMap
+      #     name: frontend-config
 patchesStrategicMerge:
   - patches/deployment-strategy.yaml
 configMapGenerator:
@@ -98,16 +98,16 @@ configMapGenerator:
       - LOG_LEVEL=debug
 images:
   - name: tegar900/flixstream-catalog-service
-    newTag: bbcd821
-  # - name: tegar900/flixstream-api-gateway
-  #   newTag: latest
-  # - name: tegar900/flixstream-user-service
-  #   newTag: latest
-  # - name: tegar900/flixstream-recommendation-service
-  #   newTag: latest
-  # - name: tegar900/flixstream-search-service
-  #   newTag: latest
-  # - name: tegar900/flixstream-payment-service
-  #   newTag: latest
-  # - name: tegar900/flixstream-frontend
-  #   newTag: latest
+    newTag: 30326ee
+# - name: tegar900/flixstream-api-gateway
+#   newTag: latest
+# - name: tegar900/flixstream-user-service
+#   newTag: latest
+# - name: tegar900/flixstream-recommendation-service
+#   newTag: latest
+# - name: tegar900/flixstream-search-service
+#   newTag: latest
+# - name: tegar900/flixstream-payment-service
+#   newTag: latest
+# - name: tegar900/flixstream-frontend
+#   newTag: latest

@@ -64,7 +64,7 @@ images:
   # - name: tegar900/flixstream-user-service
   #   newTag: latest
   - name: tegar900/flixstream-catalog-service
-    newTag: d2e34ac
+    newTag: e96262f
 # - name: tegar900/flixstream-recommendation-service
 #   newTag: latest
 # - name: tegar900/flixstream-search-service

@@ -4,6 +4,8 @@ kind: Service
 metadata:
   name: redis
   namespace: flix
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   selector:
     app: redis
@@ -16,6 +18,8 @@ kind: StatefulSet
 metadata:
   name: redis
   namespace: flix
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   serviceName: redis
   replicas: 1

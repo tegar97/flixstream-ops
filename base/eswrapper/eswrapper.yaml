@@ -4,6 +4,8 @@ kind: Service
 metadata:
   name: eswrapper
   namespace: flix
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   selector:
     app: eswrapper
@@ -17,6 +19,8 @@ kind: StatefulSet
 metadata:
   name: eswrapper
   namespace: flix
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   serviceName: eswrapper
   replicas: 1

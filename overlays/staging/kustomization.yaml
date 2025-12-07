@@ -35,22 +35,22 @@ patches:
     target:
       kind: ConfigMap
       name: catalog-service-config
-  # - path: patches/recommendation-service-configmap.yaml
-  #   target:
-  #     kind: ConfigMap
-  #     name: recommendation-service-config
-  # - path: patches/search-service-configmap.yaml
-  #   target:
-  #     kind: ConfigMap
-  #     name: search-service-config
-  # - path: patches/payment-service-configmap.yaml
-  #   target:
-  #     kind: ConfigMap
-  #     name: payment-service-config
-  # - path: patches/frontend-configmap.yaml
-  #   target:
-  #     kind: ConfigMap
-  #     name: frontend-config
+      # - path: patches/recommendation-service-configmap.yaml
+      #   target:
+      #     kind: ConfigMap
+      #     name: recommendation-service-config
+      # - path: patches/search-service-configmap.yaml
+      #   target:
+      #     kind: ConfigMap
+      #     name: search-service-config
+      # - path: patches/payment-service-configmap.yaml
+      #   target:
+      #     kind: ConfigMap
+      #     name: payment-service-config
+      # - path: patches/frontend-configmap.yaml
+      #   target:
+      #     kind: ConfigMap
+      #     name: frontend-config
 # patchesStrategicMerge:
 #   - patches/remove-deployments.yaml
 configMapGenerator:
@@ -64,12 +64,12 @@ images:
   # - name: tegar900/flixstream-user-service
   #   newTag: latest
   - name: tegar900/flixstream-catalog-service
-    newTag: ca62d05
-  # - name: tegar900/flixstream-recommendation-service
-  #   newTag: latest
-  # - name: tegar900/flixstream-search-service
-  #   newTag: latest
-  # - name: tegar900/flixstream-payment-service
-  #   newTag: latest
-  # - name: tegar900/flixstream-frontend
-  #   newTag: latest
+    newTag: c211033
+# - name: tegar900/flixstream-recommendation-service
+#   newTag: latest
+# - name: tegar900/flixstream-search-service
+#   newTag: latest
+# - name: tegar900/flixstream-payment-service
+#   newTag: latest
+# - name: tegar900/flixstream-frontend
+#   newTag: latest

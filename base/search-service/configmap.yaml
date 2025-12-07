@@ -4,8 +4,9 @@ metadata:
   name: search-service-config
   namespace: flix
 data:
-  PORT: "3004"
-  ELASTICSEARCH_URL: "http://eswrapper:9200"
+  PORT: "3005"
+  MONGODB_URI: "mongodb://mongodb:27017/flixstream_search"
   REDIS_URL: "redis://redis:6379"
+  ELASTICSEARCH_URL: "http://eswrapper:9200"
+  ELASTICSEARCH_AUTH: "false"
   CATALOG_SERVICE_URL: "http://catalog-service:3002"
-  LOG_LEVEL: "info"

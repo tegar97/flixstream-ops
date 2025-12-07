@@ -4,8 +4,9 @@ metadata:
   name: user-service-config
   namespace: flix
 data:
-  PORT: "3001"
-  MONGODB_URI: "mongodb://mongodb:27017/flixstream_users"
-  REDIS_URL: "redis://redis:6379"
-  JWT_SECRET: "flixstream-jwt-secret"
-  LOG_LEVEL: "info"
+  APP_PORT: "3001"
+  MONGO_URI: "mongodb://mongodb:27017/flixstream"
+  REDIS_HOST: "redis"
+  REDIS_PORT: "6379"
+  RABBITMQ_URL: "amqp://guest:guest@rabbitmq:5672/"
+  ELASTICSEARCH_URL: "http://eswrapper:9200"

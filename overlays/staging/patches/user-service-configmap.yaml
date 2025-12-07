@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-service-config
+data:
+  APP_PORT: "3001"
+  NODE_ENV: "dev"
+  MONGODB_URI: "mongodb://staging-mongodb:27017/flixstream-dev"
+  REDIS_HOST: "staging-redis"
+  REDIS_PORT: "6379"
+  REDIS_URL: "redis://staging-redis:6379"
+  RABBITMQ_URL: "amqp://guest:guest@staging-rabbitmq:5672/"
+  ELASTICSEARCH_URL: "http://staging-eswrapper:9200"
+

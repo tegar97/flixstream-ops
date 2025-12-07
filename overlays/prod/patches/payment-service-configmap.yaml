@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: payment-service-config
+data:
+  PORT: "3006"
+  NODE_ENV: "production"
+  MONGODB_URI: "mongodb://prod-mongodb:27017/flixstream_payments"
+  USER_SERVICE_URL: "http://prod-user-service:3001"
+  FRONTEND_URL: "https://flixstream.com"
+  REDIS_URL: "redis://staging-redis:6379"
+
+  ALLOWED_ORIGINS: "https://flixstream.com,https://www.flixstream.com"
+  MIDTRANS_IS_PRODUCTION: "true"

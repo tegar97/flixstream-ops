@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-service-config
+data:
+  APP_PORT: "3001"
+  NODE_ENV: "prod"
+  MONGODB_URI: "mongodb://prod-mongodb:27017/flixstream-prod"
+  REDIS_HOST: "prod-redis"
+  REDIS_PORT: "6379"
+  REDIS_URL: "redis://prod-redis:6379"
+  RABBITMQ_URL: "amqp://guest:guest@prod-rabbitmq:5672/"
+  ELASTICSEARCH_URL: "http://prod-eswrapper:9200"

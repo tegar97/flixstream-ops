@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: recommendation-service-config
+data:
+  PORT: "3003"
+  NODE_ENV: "staging"
+  MONGODB_URI: "mongodb://staging-mongodb:27017/flixstream_recommendations_staging"
+  REDIS_URL: "redis://staging-redis:6379"
+  RABBITMQ_URL: "amqp://guest:guest@staging-rabbitmq:5672/"
+  CATALOG_SERVICE_URL: "http://staging-catalog-service:3002"
+  USER_SERVICE_URL: "http://staging-user-service:3001"

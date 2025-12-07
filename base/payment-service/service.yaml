@@ -3,14 +3,11 @@ kind: Service
 metadata:
   name: payment-service
   namespace: flix
-  labels:
-    app: payment-service
 spec:
   selector:
     app: payment-service
   ports:
-    - name: http
-      port: 3005
-      targetPort: 3005
+    - port: 3006
+      targetPort: 3006
       protocol: TCP
   type: ClusterIP

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: search-service-config
+data:
+  PORT: "3005"
+  NODE_ENV: "production"
+  MONGODB_URI: "mongodb://prod-mongodb:27017/flixstream_search"
+  REDIS_URL: "redis://prod-redis:6379"
+  ELASTICSEARCH_URL: "http://prod-eswrapper:9200"
+  ELASTICSEARCH_AUTH: "false"
+  CATALOG_SERVICE_URL: "http://prod-catalog-service:3002"
+  ALLOWED_ORIGINS: "https://flixstream.com,https://www.flixstream.com"

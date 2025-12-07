@@ -3,14 +3,12 @@ kind: Service
 metadata:
   name: api-gateway
   namespace: flix
-  labels:
-    app: api-gateway
 spec:
   selector:
     app: api-gateway
   ports:
-    - name: http
-      port: 8080
+    - port: 8080
       targetPort: 8080
+      nodePort: 30090
       protocol: TCP
-  type: ClusterIP
+  type: NodePort

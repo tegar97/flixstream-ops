@@ -5,6 +5,7 @@ resources:
   - deployment.yaml
   - service.yaml
   - configmap.yaml
+  - secret.yaml
 
 commonLabels:
   app: payment-service

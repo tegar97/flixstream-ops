@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: search-service-config
+data:
+  PORT: "3005"
+  NODE_ENV: "development"
+  MONGODB_URI: "mongodb://dev-mongodb.flix-dev.svc.cluster.local:27017/flixstream_search_dev"
+  REDIS_URL: "redis://dev-redis:6379"
+  ELASTICSEARCH_URL: "http://dev-eswrapper:9200"
+  ELASTICSEARCH_AUTH: "false"
+  CATALOG_SERVICE_URL: "http://dev-catalog-service:3002"
+  ALLOWED_ORIGINS: "http://dev-frontend:80,http://localhost:3000,http://localhost:8080,http://localhost:5173"

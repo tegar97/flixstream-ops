@@ -4,6 +4,10 @@ metadata:
   name: frontend-config
   namespace: flix
 data:
-  PORT: "3000"
-  API_GATEWAY_URL: "http://api-gateway:8080"
-  NODE_ENV: "production"
+  VITE_APP_NAME: "FlixStream"
+  VITE_API_GATEWAY_BASE: "http://103.189.235.68:30080/api"
+  VITE_AUTH_API_BASE: "http://103.189.235.68:30080/api/auth"
+  VITE_CATALOG_API_BASE: "http://103.189.235.68:30080/api/catalog"
+  VITE_RECOMMENDATION_API_BASE: "http://103.189.235.68:30080/api/recommendations"
+  VITE_SEARCH_API_BASE: "http://103.189.235.68:30080/api/search"
+  VITE_PAYMENT_API_BASE: "http://103.189.235.68:30080/api/payments"

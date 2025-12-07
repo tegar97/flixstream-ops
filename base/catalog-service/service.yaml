@@ -3,14 +3,11 @@ kind: Service
 metadata:
   name: catalog-service
   namespace: flix
-  labels:
-    app: catalog-service
 spec:
   selector:
     app: catalog-service
   ports:
-    - name: http
-      port: 3002
+    - port: 3002
       targetPort: 3002
       protocol: TCP
   type: ClusterIP

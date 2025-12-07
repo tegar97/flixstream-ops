@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: recommendation-service-config
+data:
+  PORT: "3003"
+  NODE_ENV: "production"
+  MONGODB_URI: "mongodb://prod-mongodb:27017/flixstream_recommendations"
+  REDIS_URL: "redis://prod-redis:6379"
+  RABBITMQ_URL: "amqp://guest:guest@prod-rabbitmq:5672/"
+  CATALOG_SERVICE_URL: "http://prod-catalog-service:3002"
+  USER_SERVICE_URL: "http://prod-user-service:3001"

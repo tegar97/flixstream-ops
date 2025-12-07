@@ -1,0 +1,125 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: api-gateway-probe
+  labels:
+    app: api-gateway
+spec:
+  prober:
+    url: blackbox-exporter:9115
+    path: /probe
+  module: http_2xx
+  targets:
+    staticConfig:
+      static:
+        - api-gateway:3000
+  interval: 30s
+  scrapeTimeout: 10s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: user-service-probe
+  labels:
+    app: user-service
+spec:
+  prober:
+    url: blackbox-exporter:9115
+    path: /probe
+  module: http_2xx
+  targets:
+    staticConfig:
+      static:
+        - user-service:3001
+  interval: 30s
+  scrapeTimeout: 10s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: catalog-service-probe
+  labels:
+    app: catalog-service
+spec:
+  prober:
+    url: blackbox-exporter:9115
+    path: /probe
+  module: http_2xx
+  targets:
+    staticConfig:
+      static:
+        - catalog-service:3002
+  interval: 30s
+  scrapeTimeout: 10s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: recommendation-service-probe
+  labels:
+    app: recommendation-service
+spec:
+  prober:
+    url: blackbox-exporter:9115
+    path: /probe
+  module: http_2xx
+  targets:
+    staticConfig:
+      static:
+        - recommendation-service:3003
+  interval: 30s
+  scrapeTimeout: 10s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: search-service-probe
+  labels:
+    app: search-service
+spec:
+  prober:
+    url: blackbox-exporter:9115
+    path: /probe
+  module: http_2xx
+  targets:
+    staticConfig:
+      static:
+        - search-service:3004
+  interval: 30s
+  scrapeTimeout: 10s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: payment-service-probe
+  labels:
+    app: payment-service
+spec:
+  prober:
+    url: blackbox-exporter:9115
+    path: /probe
+  module: http_2xx
+  targets:
+    staticConfig:
+      static:
+        - payment-service:3005
+  interval: 30s
+  scrapeTimeout: 10s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: frontend-probe
+  labels:
+    app: frontend
+spec:
+  prober:
+    url: blackbox-exporter:9115
+    path: /probe
+  module: http_2xx
+  targets:
+    staticConfig:
+      static:
+        - frontend:80
+  interval: 30s
+  scrapeTimeout: 10s

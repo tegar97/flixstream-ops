@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-gateway-config
+data:
+  PORT: "8080"
+  GIN_MODE: "release"
+  USER_SERVICE_URL: "http://staging-user-service:3001"
+  CATALOG_SERVICE_URL: "http://staging-catalog-service:3002"
+  RECOMMENDATION_SERVICE_URL: "http://staging-recommendation-service:3003"
+  SEARCH_SERVICE_URL: "http://staging-search-service:3005"
+  PAYMENT_SERVICE_URL: "http://staging-payment-service:3006"
+  ALLOWED_ORIGINS: "https://staging.flixstream.com"

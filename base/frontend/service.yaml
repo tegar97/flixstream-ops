@@ -3,14 +3,12 @@ kind: Service
 metadata:
   name: frontend
   namespace: flix
-  labels:
-    app: frontend
 spec:
   selector:
     app: frontend
   ports:
-    - name: http
-      port: 3000
-      targetPort: 3000
+    - port: 8000
+      targetPort: 8000
       protocol: TCP
-  type: ClusterIP
+  # type: LoadBalancer
+  type: NodePort

@@ -1,0 +1,113 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: flix-dev
+resources:
+  - ../../base/namespace
+  - ../../base/redis
+  - ../../base/mongodb
+  - ../../base/rabbitmq
+  - ../../base/eswrapper
+  - ../../base/catalog-service
+  # - ../../base/api-gateway
+  # - ../../base/user-service
+  # - ../../base/recommendation-service
+  # - ../../base/search-service
+  # - ../../base/payment-service
+  # - ../../base/frontend
+commonLabels:
+  environment: dev
+namePrefix: dev-
+replicas:
+  # - name: api-gateway
+  #   count: 1
+  # - name: user-service
+  #   count: 1
+  - name: catalog-service
+    count: 1
+  # - name: recommendation-service
+  #   count: 1
+  # - name: search-service
+  #   count: 1
+  # - name: payment-service
+  #   count: 1
+  # - name: frontend
+  #   count: 1
+patches:
+  # - path: patches/api-gateway-service.yaml
+  #   target:
+  #     kind: Service
+  #     name: api-gateway
+  # - path: patches/api-gateway-configmap.yaml
+  #   target:
+  #     kind: ConfigMap
+  #     name: api-gateway-config
+  # - path: patches/user-service-resources.yaml
+  #   target:
+  #     kind: Deployment
+  #     name: user-service
+  # - path: patches/user-service-configmap.yaml
+  #   target:
+  #     kind: ConfigMap
+  #     name: user-service-config
+  - path: patches/catalog-service-resources.yaml
+    target:
+      kind: Deployment
+      name: catalog-service
+  - path: patches/catalog-service-configmap.yaml
+    target:
+      kind: ConfigMap
+      name: catalog-service-config
+  # - path: patches/recommendation-service-resources.yaml
+  #   target:
+  #     kind: Deployment
+  #     name: recommendation-service
+  # - path: patches/recommendation-service-configmap.yaml
+  #   target:
+  #     kind: ConfigMap
+  #     name: recommendation-service-config
+  # - path: patches/search-service-resources.yaml
+  #   target:
+  #     kind: Deployment
+  #     name: search-service
+  # - path: patches/search-service-configmap.yaml
+  #   target:
+  #     kind: ConfigMap
+  #     name: search-service-config
+  # - path: patches/payment-service-resources.yaml
+  #   target:
+  #     kind: Deployment
+  #     name: payment-service
+  # - path: patches/payment-service-configmap.yaml
+  #   target:
+  #     kind: ConfigMap
+  #     name: payment-service-config
+  # - path: patches/frontend-resources.yaml
+  #   target:
+  #     kind: Deployment
+  #     name: frontend
+  # - path: patches/frontend-configmap.yaml
+  #   target:
+  #     kind: ConfigMap
+  #     name: frontend-config
+patchesStrategicMerge:
+  - patches/deployment-strategy.yaml
+configMapGenerator:
+  - name: env-config
+    literals:
+      - ENVIRONMENT=dev
+      - LOG_LEVEL=debug
+images:
+  - name: tegar900/flixstream-catalog-service
+    newTag: bbcd821
+  # - name: tegar900/flixstream-api-gateway
+  #   newTag: latest
+  # - name: tegar900/flixstream-user-service
+  #   newTag: latest
+  # - name: tegar900/flixstream-recommendation-service
+  #   newTag: latest
+  # - name: tegar900/flixstream-search-service
+  #   newTag: latest
+  # - name: tegar900/flixstream-payment-service
+  #   newTag: latest
+  # - name: tegar900/flixstream-frontend
+  #   newTag: latest

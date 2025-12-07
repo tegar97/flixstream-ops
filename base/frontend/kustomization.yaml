@@ -8,4 +8,4 @@ resources:
 
 commonLabels:
   app: frontend
-  component: frontend
+  component: web

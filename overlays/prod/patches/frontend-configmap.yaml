@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+data:
+  VITE_APP_NAME: "FlixStream"
+  VITE_AUTH_API_BASE: "https://api.flixstream.com/api/auth"
+  VITE_CATALOG_API_BASE: "https://api.flixstream.com/catalog"
+  VITE_RECOMMENDATION_API_BASE: "https://api.flixstream.com/api/recommendations"
+  VITE_SEARCH_API_BASE: "https://api.flixstream.com/api/search"
+  VITE_PAYMENT_API_BASE: "https://api.flixstream.com/api/payments"

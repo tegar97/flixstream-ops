@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: search-service-config
+data:
+  PORT: "3005"
+  NODE_ENV: "staging"
+  MONGODB_URI: "mongodb://staging-mongodb:27017/flixstream_search_staging"
+  REDIS_URL: "redis://staging-redis:6379"
+  ELASTICSEARCH_URL: "http://staging-eswrapper:9200"
+  ELASTICSEARCH_AUTH: "false"
+  CATALOG_SERVICE_URL: "http://staging-catalog-service:3002"
+  ALLOWED_ORIGINS: "https://staging.flixstream.com"

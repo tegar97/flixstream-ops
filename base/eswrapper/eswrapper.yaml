@@ -1,0 +1,54 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eswrapper
+  namespace: flix
+spec:
+  selector:
+    app: eswrapper
+  ports:
+    - name: http
+      port: 9200
+      targetPort: 9200
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: eswrapper
+  namespace: flix
+spec:
+  serviceName: eswrapper
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eswrapper
+  template:
+    metadata:
+      labels:
+        app: eswrapper
+    spec:
+      containers:
+        - name: eswrapper
+          image: elasticsearch:8.15.0
+          ports:
+            - containerPort: 9200
+            - containerPort: 9300
+          env:
+            - name: discovery.type
+              value: single-node
+            - name: xpack.security.enabled
+              value: "false"
+            - name: ES_JAVA_OPTS
+              value: "-Xms512m -Xmx512m"
+          volumeMounts:
+            - name: es-data
+              mountPath: /usr/share/elasticsearch/data
+  volumeClaimTemplates:
+    - metadata:
+        name: es-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 20Gi

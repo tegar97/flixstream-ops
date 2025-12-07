@@ -3,14 +3,11 @@ kind: Service
 metadata:
   name: recommendation-service
   namespace: flix
-  labels:
-    app: recommendation-service
 spec:
   selector:
     app: recommendation-service
   ports:
-    - name: http
-      port: 3003
+    - port: 3003
       targetPort: 3003
       protocol: TCP
   type: ClusterIP

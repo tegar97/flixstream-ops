@@ -98,7 +98,7 @@ configMapGenerator:
       - LOG_LEVEL=debug
 images:
   - name: tegar900/flixstream-catalog-service
-    newTag: 30326ee
+    newTag: f5882d7
 # - name: tegar900/flixstream-api-gateway
 #   newTag: latest
 # - name: tegar900/flixstream-user-service

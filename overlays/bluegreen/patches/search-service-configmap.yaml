@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: search-service-config
+data:
+  PORT: "3004"
+  NODE_ENV: "bluegreen"
+  ELASTICSEARCH_URL: "http://bluegreen-eswrapper:9200"
+  REDIS_URL: "redis://bluegreen-redis:6379"
+  CATALOG_SERVICE_URL: "http://bluegreen-catalog-service:3002"
+  LOG_LEVEL: "info"

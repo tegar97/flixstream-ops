@@ -1,0 +1,11 @@
+# PodDisruptionBudget for frontend
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: frontend-pdb
+  namespace: flix
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: frontend

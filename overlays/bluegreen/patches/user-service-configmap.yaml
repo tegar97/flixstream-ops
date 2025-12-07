@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-service-config
+data:
+  PORT: "3001"
+  NODE_ENV: "bluegreen"
+  MONGODB_URI: "mongodb://bluegreen-mongodb:27017/flixstream_users_bluegreen"
+  REDIS_URL: "redis://bluegreen-redis:6379"
+  JWT_SECRET: "flixstream-jwt-secret-bluegreen"
+  LOG_LEVEL: "info"
+  ALLOWED_ORIGINS: "http://bluegreen-frontend:3000,https://flixstream.com"

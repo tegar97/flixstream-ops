@@ -1,0 +1,18 @@
+# Preview service for Search Service Blue-Green deployment
+apiVersion: v1
+kind: Service
+metadata:
+  name: search-service-preview
+  namespace: flix
+  labels:
+    app: search-service
+    service-type: preview
+spec:
+  selector:
+    app: search-service
+  ports:
+    - name: http
+      port: 3004
+      targetPort: 3004
+      protocol: TCP
+  type: ClusterIP

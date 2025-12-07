@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+  namespace: flix
+data:
+  PORT: "3000"
+  API_GATEWAY_URL: "http://api-gateway:8080"
+  NODE_ENV: "production"

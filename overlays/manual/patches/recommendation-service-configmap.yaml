@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: recommendation-service-config
+data:
+  PORT: "3003"
+  NODE_ENV: "manual"
+  MONGODB_URI: "mongodb://manual-mongodb:27017/flixstream_recommendations_manual"
+  REDIS_URL: "redis://manual-redis:6379"
+  CATALOG_SERVICE_URL: "http://manual-catalog-service:3002"
+  USER_SERVICE_URL: "http://manual-user-service:3001"
+  LOG_LEVEL: "debug"

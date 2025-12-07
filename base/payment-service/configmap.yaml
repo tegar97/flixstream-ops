@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: payment-service-config
+  namespace: flix
+data:
+  PORT: "3005"
+  MONGODB_URI: "mongodb://mongodb:27017/flixstream_payments"
+  REDIS_URL: "redis://redis:6379"
+  RABBITMQ_URL: "amqp://rabbitmq:5672"
+  USER_SERVICE_URL: "http://user-service:3001"
+  LOG_LEVEL: "info"

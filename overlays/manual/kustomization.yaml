@@ -1,0 +1,97 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Manual deployment overlay - uses Recreate strategy
+# Expected downtime: ~30-60 seconds
+namespace: flix-manual
+
+resources:
+  - ../../base/namespace
+  - ../../base/api-gateway
+  - ../../base/user-service
+  - ../../base/catalog-service
+  - ../../base/recommendation-service
+  - ../../base/search-service
+  - ../../base/payment-service
+  - ../../base/frontend
+
+commonLabels:
+  environment: manual
+  deployment-strategy: recreate
+
+namePrefix: manual-
+
+# Single replica for manual deployment testing
+replicas:
+  - name: api-gateway
+    count: 1
+  - name: user-service
+    count: 1
+  - name: catalog-service
+    count: 1
+  - name: recommendation-service
+    count: 1
+  - name: search-service
+    count: 1
+  - name: payment-service
+    count: 1
+  - name: frontend
+    count: 1
+
+# Apply Recreate strategy to all deployments
+patches:
+  - path: patches/deployment-strategy.yaml
+    target:
+      kind: Deployment
+  # ConfigMap patches for environment-specific values
+  - path: patches/api-gateway-configmap.yaml
+    target:
+      kind: ConfigMap
+      name: api-gateway-config
+  - path: patches/user-service-configmap.yaml
+    target:
+      kind: ConfigMap
+      name: user-service-config
+  - path: patches/catalog-service-configmap.yaml
+    target:
+      kind: ConfigMap
+      name: catalog-service-config
+  - path: patches/recommendation-service-configmap.yaml
+    target:
+      kind: ConfigMap
+      name: recommendation-service-config
+  - path: patches/search-service-configmap.yaml
+    target:
+      kind: ConfigMap
+      name: search-service-config
+  - path: patches/payment-service-configmap.yaml
+    target:
+      kind: ConfigMap
+      name: payment-service-config
+  - path: patches/frontend-configmap.yaml
+    target:
+      kind: ConfigMap
+      name: frontend-config
+
+configMapGenerator:
+  - name: env-config
+    literals:
+      - ENVIRONMENT=manual
+      - LOG_LEVEL=debug
+      - DEPLOYMENT_STRATEGY=recreate
+
+images:
+  - name: tegar900/flixstream-api-gateway
+    newTag: latest
+  - name: tegar900/flixstream-user-service
+    newTag: latest
+  - name: tegar900/flixstream-catalog-service
+    newTag: latest
+  - name: tegar900/flixstream-recommendation-service
+    newTag: latest
+  - name: tegar900/flixstream-search-service
+    newTag: latest
+  - name: tegar900/flixstream-payment-service
+    newTag: latest
+  - name: tegar900/flixstream-frontend
+    newTag: latest

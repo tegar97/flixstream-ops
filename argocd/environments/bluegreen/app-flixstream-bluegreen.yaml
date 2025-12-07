@@ -1,0 +1,35 @@
+# ArgoCD Application for Blue-Green Deployment Strategy
+# Uses Argo Rollouts with Blue-Green - expected downtime ~0-2s
+# NOTE: Requires Argo Rollouts controller installed in cluster
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: flixstream-bluegreen
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+    deployment-strategy: "blue-green"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    environment: bluegreen
+    deployment-strategy: blue-green
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:tegar97/flixstream-ops.git
+    targetRevision: main
+    path: overlays/bluegreen
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: flix-bluegreen
+  syncPolicy:
+    # Manual sync for Blue-Green - requires promotion
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: flix-manual
+  labels:
+    app.kubernetes.io/name: flixstream
+    app.kubernetes.io/part-of: flixstream-platform
+    deployment-strategy: recreate
+    environment: manual

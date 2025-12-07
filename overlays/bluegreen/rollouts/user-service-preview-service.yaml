@@ -1,0 +1,18 @@
+# Preview service for User Service Blue-Green deployment
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service-preview
+  namespace: flix
+  labels:
+    app: user-service
+    service-type: preview
+spec:
+  selector:
+    app: user-service
+  ports:
+    - name: http
+      port: 3001
+      targetPort: 3001
+      protocol: TCP
+  type: ClusterIP

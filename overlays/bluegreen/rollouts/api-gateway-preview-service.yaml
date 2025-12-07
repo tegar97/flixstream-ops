@@ -1,0 +1,19 @@
+# Preview service for API Gateway Blue-Green deployment
+# Used to test the green deployment before promoting to production
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway-preview
+  namespace: flix
+  labels:
+    app: api-gateway
+    service-type: preview
+spec:
+  selector:
+    app: api-gateway
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+  type: ClusterIP

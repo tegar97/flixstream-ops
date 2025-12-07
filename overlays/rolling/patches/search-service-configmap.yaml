@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: search-service-config
+data:
+  PORT: "3004"
+  NODE_ENV: "rolling"
+  ELASTICSEARCH_URL: "http://rolling-eswrapper:9200"
+  REDIS_URL: "redis://rolling-redis:6379"
+  CATALOG_SERVICE_URL: "http://rolling-catalog-service:3002"
+  LOG_LEVEL: "info"

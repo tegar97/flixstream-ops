@@ -1,0 +1,71 @@
+# Argo Rollout for API Gateway with Blue-Green strategy
+# Best practices:
+# - Manual promotion for controlled releases
+# - Preview service for testing before production
+# - 60s scale-down delay for safe rollback
+# - Revision history for quick rollback
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: api-gateway
+  namespace: flix
+  labels:
+    app: api-gateway
+    component: gateway
+spec:
+  replicas: 2
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+        component: gateway
+        environment: bluegreen
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: api-gateway
+          image: tegar900/flixstream-api-gateway:latest
+          ports:
+            - containerPort: 8080
+              name: http
+          envFrom:
+            - configMapRef:
+                name: bluegreen-api-gateway-config
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+  strategy:
+    blueGreen:
+      # Active service receives production traffic
+      activeService: bluegreen-api-gateway
+      # Preview service for testing green deployment
+      previewService: bluegreen-api-gateway-preview
+      # BEST PRACTICE: Manual promotion for research control
+      autoPromotionEnabled: false
+      # Keep blue pods for 60s after switch for safe rollback
+      scaleDownDelaySeconds: 60

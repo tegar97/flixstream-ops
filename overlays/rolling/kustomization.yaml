@@ -1,0 +1,106 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Rolling Update deployment overlay
+# Uses RollingUpdate strategy with maxUnavailable=0 for zero-downtime
+# Expected downtime: ~5-15 seconds (minimal disruption)
+namespace: flix-rolling
+
+resources:
+  - ../../base/namespace
+  - ../../base/api-gateway
+  - ../../base/user-service
+  - ../../base/catalog-service
+  - ../../base/recommendation-service
+  - ../../base/search-service
+  - ../../base/payment-service
+  - ../../base/frontend
+  # PodDisruptionBudgets for availability during rolling updates
+  - pdb/api-gateway-pdb.yaml
+  - pdb/user-service-pdb.yaml
+  - pdb/catalog-service-pdb.yaml
+  - pdb/recommendation-service-pdb.yaml
+  - pdb/search-service-pdb.yaml
+  - pdb/payment-service-pdb.yaml
+  - pdb/frontend-pdb.yaml
+
+commonLabels:
+  environment: rolling
+  deployment-strategy: rolling-update
+
+namePrefix: rolling-
+
+# 2 replicas minimum for rolling update effectiveness
+replicas:
+  - name: api-gateway
+    count: 2
+  - name: user-service
+    count: 2
+  - name: catalog-service
+    count: 2
+  - name: recommendation-service
+    count: 2
+  - name: search-service
+    count: 2
+  - name: payment-service
+    count: 2
+  - name: frontend
+    count: 2
+
+# Apply RollingUpdate strategy to all deployments
+patches:
+  - path: patches/deployment-strategy.yaml
+    target:
+      kind: Deployment
+  # ConfigMap patches for environment-specific values
+  - path: patches/api-gateway-configmap.yaml
+    target:
+      kind: ConfigMap
+      name: api-gateway-config
+  - path: patches/user-service-configmap.yaml
+    target:
+      kind: ConfigMap
+      name: user-service-config
+  - path: patches/catalog-service-configmap.yaml
+    target:
+      kind: ConfigMap
+      name: catalog-service-config
+  - path: patches/recommendation-service-configmap.yaml
+    target:
+      kind: ConfigMap
+      name: recommendation-service-config
+  - path: patches/search-service-configmap.yaml
+    target:
+      kind: ConfigMap
+      name: search-service-config
+  - path: patches/payment-service-configmap.yaml
+    target:
+      kind: ConfigMap
+      name: payment-service-config
+  - path: patches/frontend-configmap.yaml
+    target:
+      kind: ConfigMap
+      name: frontend-config
+
+configMapGenerator:
+  - name: env-config
+    literals:
+      - ENVIRONMENT=rolling
+      - LOG_LEVEL=info
+      - DEPLOYMENT_STRATEGY=rolling-update
+
+images:
+  - name: tegar900/flixstream-api-gateway
+    newTag: latest
+  - name: tegar900/flixstream-user-service
+    newTag: latest
+  - name: tegar900/flixstream-catalog-service
+    newTag: latest
+  - name: tegar900/flixstream-recommendation-service
+    newTag: latest
+  - name: tegar900/flixstream-search-service
+    newTag: latest
+  - name: tegar900/flixstream-payment-service
+    newTag: latest
+  - name: tegar900/flixstream-frontend
+    newTag: latest

@@ -19,12 +19,20 @@ spec:
         # Wait for MongoDB to be ready
         - name: wait-for-mongodb
           image: busybox:1.36
+          envFrom:
+            - configMapRef:
+                name: catalog-service-config
           command:
             - sh
             - -c
             - |
               echo "Waiting for MongoDB to be ready..."
-              until nc -z mongodb 27017; do
+              echo "MONGODB_URI: $MONGODB_URI"
+              # Extract hostname and port from mongodb://host:port/database
+              MONGO_HOST=$(echo $MONGODB_URI | sed 's|mongodb://||' | sed 's|/.*||' | sed 's|:.*||')
+              MONGO_PORT=$(echo $MONGODB_URI | sed 's|mongodb://||' | sed 's|/.*||' | sed 's|.*:||')
+              echo "Checking MongoDB at $MONGO_HOST:$MONGO_PORT"
+              until nc -z $MONGO_HOST ${MONGO_PORT:-27017}; do
                 echo "MongoDB is unavailable - sleeping"
                 sleep 2
               done
@@ -32,12 +40,20 @@ spec:
         # Wait for Redis to be ready
         - name: wait-for-redis
           image: busybox:1.36
+          envFrom:
+            - configMapRef:
+                name: catalog-service-config
           command:
             - sh
             - -c
             - |
               echo "Waiting for Redis to be ready..."
-              until nc -z redis 6379; do
+              echo "REDIS_URL: $REDIS_URL"
+              # Extract hostname and port from redis://host:port
+              REDIS_HOST=$(echo $REDIS_URL | sed 's|redis://||' | sed 's|:.*||')
+              REDIS_PORT=$(echo $REDIS_URL | sed 's|redis://||' | sed 's|.*:||')
+              echo "Checking Redis at $REDIS_HOST:$REDIS_PORT"
+              until nc -z $REDIS_HOST ${REDIS_PORT:-6379}; do
                 echo "Redis is unavailable - sleeping"
                 sleep 2
               done

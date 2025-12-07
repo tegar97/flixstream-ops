@@ -10,7 +10,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: git@github.com:tegar97/flix-ops.git
+    repoURL: git@github.com:tegar97/flixstream-ops.git
     targetRevision: main
     path: overlays/staging
   destination:

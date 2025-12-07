@@ -1,5 +1,6 @@
 # ArgoCD Application for Manual Deployment Strategy
 # Uses Recreate strategy - expected downtime ~30-60s
+# MANUAL SYNC - harus trigger manual via ArgoCD UI atau CLI
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -23,9 +24,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: flix-manual
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    # MANUAL SYNC - tidak auto deploy
     syncOptions:
       - CreateNamespace=true
     retry:

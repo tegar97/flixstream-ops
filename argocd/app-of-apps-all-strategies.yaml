@@ -1,5 +1,6 @@
 # ArgoCD Root Application - App of Apps pattern
-# Applies all deployment strategies (manual, rolling, bluegreen)
+# Creates ArgoCD Application CRs but does NOT auto-sync the workloads
+# Each strategy (manual, rolling, bluegreen) must be synced individually
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -17,6 +18,6 @@ spec:
     server: https://kubernetes.default.svc
     namespace: argocd
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    # MANUAL SYNC - harus trigger manual untuk create ArgoCD apps
+    syncOptions:
+      - CreateNamespace=true

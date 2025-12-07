@@ -14,7 +14,7 @@ resources:
   # - ../../base/search-service
   # - ../../base/payment-service
   # - ../../base/frontend
-  # - rollouts
+  - rollouts
 commonLabels:
   environment: prod
 namePrefix: prod-
@@ -55,8 +55,8 @@ patches:
     target:
       kind: StatefulSet
       name: redis
-# patchesStrategicMerge:
-#   - patches/remove-deployments.yaml
+patchesStrategicMerge:
+  - patches/remove-deployments.yaml
 configMapGenerator:
   - name: env-config
     literals:
